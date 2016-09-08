@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
-        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
@@ -11,7 +11,6 @@
  
 	<context:component-scan base-package="practice.spring" />
 	<mvc:annotation-driven />
-	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
@@ -20,5 +19,29 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
- 
+	<!-- used for message source -->
+	<bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+    <!-- Resolves the locale based on its implementation. It has 3 implementations -->
+    <!-- SessionLocaleResolver,CookieLocaleResolver,AcceptHeaderLocaleResolver(Default)-->
+    <bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+	
+	<!-- This interceptor intercept the HTTP request and checks for the special parameter in the request. -->
+    <!-- The name of the parameter that it has to check in the request can be specified by the property called paramName -->
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/**" />
+	        <bean id="localeChangeInterceptor"
+	            class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	            <property name="paramName" value="lang" />
+	        </bean>
+	    </mvc:interceptor>
+   </mvc:interceptors>
+    
 </beans>

@@ -5,11 +5,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
 
-	@NotEmpty
+	// validation used for this field in validator
 	private String userName;
 	@Email
 	private String userEmail;
+	// validation used for this field in validator
+	private String password;
+	private String confirmPassword;
 	private int id;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -27,5 +31,17 @@ public class User {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 }

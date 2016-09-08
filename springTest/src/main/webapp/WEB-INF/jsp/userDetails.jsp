@@ -11,6 +11,8 @@
 	<h2>Registration successful</h2>
 	<h2>userName:${name}</h2>
 	<h2>Email:${email}</h2>
+	<h2>Password:${user.password}</h2>
+	<h2>ConfirmPassword::${user.confirmPassword}</h2>
 	<h3><a href="logout">Logout</a></h3>
 </body>
 </html>

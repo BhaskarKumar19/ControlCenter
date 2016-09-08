@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import practice.spring.pojo.User;
+import practice.spring.validator.userValidator;
 
 @SessionAttributes("registrationForm")
 @Controller
 public class UserRegistrationController {
+	@Autowired
+	userValidator validator;
 
 	@ModelAttribute
 	public void addUserToModel(Model model) {
@@ -39,6 +43,7 @@ public class UserRegistrationController {
 			ModelMap model) {
 		System.out.println("registerUser::" + user.getUserName());
 		System.out.println("registerUser::" + user.getUserEmail());
+		validator.validate(user, result);
 		if (result.hasErrors()) {
 			return "userRegistration";
 		} else {
@@ -54,6 +59,7 @@ public class UserRegistrationController {
 		System.out.println("userDetails::" + user.getUserEmail());
 		model.addAttribute("name", user.getUserName());
 		model.addAttribute("email", user.getUserEmail());
+		model.addAttribute("user", user);
 
 		return "userDetails";
 	}
@@ -67,6 +73,7 @@ public class UserRegistrationController {
 
 	@RequestMapping(value = "/logoutMsg", method = RequestMethod.GET)
 	public String logoutPage(ModelMap model) {
-		return "logout";
+		model.addAttribute("logout", "logout");
+		return "userRegistration";
 	}
 }
