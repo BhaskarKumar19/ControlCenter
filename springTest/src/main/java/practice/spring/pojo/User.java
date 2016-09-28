@@ -12,6 +12,7 @@ public class User {
 	// validation used for this field in validator
 	private String password;
 	private String confirmPassword;
+	private String accessToken;
 	private int id;
 	
 	public String getUserName() {
@@ -43,5 +44,11 @@ public class User {
 	}
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+	public String getAccessToken() {
+		return accessToken;
+	}
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 }

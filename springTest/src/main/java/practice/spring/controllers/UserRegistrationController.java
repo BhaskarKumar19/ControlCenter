@@ -1,5 +1,7 @@
 package practice.spring.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import practice.spring.exceptions.SystemErrorException;
 import practice.spring.pojo.User;
+import practice.spring.utils.UserServiceImpl;
 import practice.spring.validator.userValidator;
 
 @SessionAttributes("registrationForm")
@@ -22,6 +26,8 @@ import practice.spring.validator.userValidator;
 public class UserRegistrationController {
 	@Autowired
 	userValidator validator;
+	@Autowired
+	UserServiceImpl userServiceImpl;
 
 	@ModelAttribute
 	public void addUserToModel(Model model) {
@@ -47,6 +53,11 @@ public class UserRegistrationController {
 		if (result.hasErrors()) {
 			return "userRegistration";
 		} else {
+			try {
+				userServiceImpl.createUser(null, user);
+			} catch (SystemErrorException e) {
+				e.printStackTrace();
+			}
 			return "redirect:userDetails";
 
 		}
@@ -60,7 +71,14 @@ public class UserRegistrationController {
 		model.addAttribute("name", user.getUserName());
 		model.addAttribute("email", user.getUserEmail());
 		model.addAttribute("user", user);
-
+		List<User> userList=null;
+		try {
+			userList = userServiceImpl.getUserList(null);
+		} catch (SystemErrorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("userList", userList);
 		return "userDetails";
 	}
 

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,10 +9,30 @@
 </head>
 <body>
 	<h2>Registration successful</h2>
-	<h2>userName:${name}</h2>
-	<h2>Email:${email}</h2>
-	<h2>Password:${user.password}</h2>
-	<h2>ConfirmPassword::${user.confirmPassword}</h2>
+	<ul>
+		<li>userName:${name}</li>
+		<li>Email:${email}</li>
+		<li>Password:${user.password}</li>
+		<li>ConfirmPassword::${user.confirmPassword}</li>
+	</ul>
+	
+	<table>
+	<caption>Registered Users Details</caption>
+		<tr>
+			<th>User Name</th>
+			<th>Email</th>
+			<th>Access Key</th>
+		</tr>
+		<c:forEach items="${userList}" var="element"> 
+		  <tr>
+		    <td>${element.userName}</td>
+		    <td>${element.userEmail}</td>
+		    <td>${element.accessToken}</td>
+		  </tr>
+		</c:forEach>
+	</table>
+		
+	
 	<h3><a href="logout">Logout</a></h3>
 </body>
 </html>
