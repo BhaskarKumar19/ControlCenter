@@ -12,13 +12,15 @@ public interface DatabaseOperations {
 
 	public void setDataSource(DataSource ds);
 
-	public void deleteRepo(Integer id);
+	public void deleteRepo(int id);
 
-	public void createRepo(Integer id, Object value);
+	public long createRepo(int id, Object value);
 
-	public void updateRepo(Integer id, Object value);
+	public Object getByProperty(String property, String value);
 
-	public Object getRepo(Integer id);
+	public void updateRepo(int id, Object value);
 
-	public Object getRepoList(Integer id);
+	public Object getRepo(int id);
+
+	public Object getRepoList(int id);
 }

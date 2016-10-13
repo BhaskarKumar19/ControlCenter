@@ -4,14 +4,14 @@ import practice.spring.exceptions.SystemErrorException;
 
 public interface UserService {
 
-	public void createUser(Integer id, Object value) throws SystemErrorException;
+	public void createUser(int id, Object value) throws SystemErrorException;
 
-	public void updateUser(Integer id, Object value);
+	public void updateUser(int id, Object value);
 
-	public Object getUser(Integer id);
+	public Object getUser(int id);
 
-	public Object getUserList(Integer id) throws SystemErrorException;
+	public Object getUserList(int id) throws SystemErrorException;
 
-	public Object deleteUser(Integer id);
+	public Object deleteUser(int id);
 
 }

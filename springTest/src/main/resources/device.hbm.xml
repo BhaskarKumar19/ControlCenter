@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+<hibernate-mapping>  
+	 
+	<class name="practice.spring.pojo.Device" table="DEVICE">
+      <meta attribute="class-description">
+         This class contains the device detail. 
+      </meta>
+      <id name="id" type="int" column="ID">
+         <generator class="native"/>
+      </id>
+      <property name="deviceId" column=" DEVICE_ID" type="string"/>
+      <property name="deviceName" column="DEVICE_NAME" type="string"/>
+      <property name="deviceStatus" column="DEVICE_STATUS" type="string"/>
+   </class>
+       
+</hibernate-mapping>  

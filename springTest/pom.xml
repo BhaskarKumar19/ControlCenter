@@ -10,6 +10,7 @@
 
 	<properties>
 		<spring.version>4.3.1.RELEASE</spring.version>
+		<hibernate.version>3.6.9.Final</hibernate.version>
 	</properties>
 
 	<dependencies>
@@ -70,6 +71,31 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.6</version>
 		</dependency>
+		
+		<!-- Hibernate starts -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>3.6.10.Final</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>javassist</groupId>
+		    <artifactId>javassist</artifactId>
+		    <version>3.12.1.GA</version>
+		</dependency>
+		<!-- Hibernate ends -->
+		
+		<!-- Spring ORM support -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-orm</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		
+		<!-- Spring ORM support ends-->
 		
 		
 	</dependencies>

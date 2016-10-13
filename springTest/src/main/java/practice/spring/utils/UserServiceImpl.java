@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 		UserDAO = userDAO;
 	}
 
-	public void createUser(Integer id, Object value) throws SystemErrorException {
+	public void createUser(int id, Object value) throws SystemErrorException {
 		// TODO Auto-generated method stub
 		try {
 			UserDAO.createRepo(id, value);
@@ -36,17 +36,17 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	public void updateUser(Integer id, Object value) {
+	public void updateUser(int id, Object value) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public Object getUser(Integer id) {
+	public Object getUser(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<User> getUserList(Integer id) throws SystemErrorException {
+	public List<User> getUserList(int id) throws SystemErrorException {
 		try {
 			return UserDAO.getRepoList(id);
 		} catch (DataAccessException ex) {
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	public Object deleteUser(Integer id) {
+	public Object deleteUser(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

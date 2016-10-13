@@ -31,6 +31,23 @@
 		  </tr>
 		</c:forEach>
 	</table>
+	
+	
+	<table>
+	<caption>Device Details</caption>
+		<tr>
+			<th>Device name</th>
+			<th>device</th>
+			<th>Access Key</th>
+		</tr>
+		<c:forEach items="${deviceList}" var="element"> 
+		  <tr>
+		    <td>${element.deviceId}</td>
+		    <td>${element.deviceName}</td>
+		    <td>${element.deviceStatus}</td>
+		  </tr>
+		</c:forEach>
+	</table>
 		
 	
 	<h3><a href="logout">Logout</a></h3>

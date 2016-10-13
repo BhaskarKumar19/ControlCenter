@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import practice.spring.exceptions.DatabaseException;
 import practice.spring.exceptions.SystemErrorException;
+import practice.spring.pojo.Device;
 import practice.spring.pojo.User;
+import practice.spring.utils.DeviceService;
 import practice.spring.utils.UserServiceImpl;
 import practice.spring.validator.userValidator;
 
@@ -28,6 +31,8 @@ public class UserRegistrationController {
 	userValidator validator;
 	@Autowired
 	UserServiceImpl userServiceImpl;
+	@Autowired
+	DeviceService deviceServiceImpl;
 
 	@ModelAttribute
 	public void addUserToModel(Model model) {
@@ -54,10 +59,17 @@ public class UserRegistrationController {
 			return "userRegistration";
 		} else {
 			try {
-				userServiceImpl.createUser(null, user);
-			} catch (SystemErrorException e) {
+				//userServiceImpl.createUser(0, user);
+				Device device = new Device();
+				device.setDeviceName(user.getUserName());
+				device.setDeviceId("dummyID");
+				device.setDeviceStatus("OFFLINE");
+				deviceServiceImpl.createDevice(0, device);
+
+			} catch (DatabaseException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 			return "redirect:userDetails";
 
 		}
@@ -71,14 +83,22 @@ public class UserRegistrationController {
 		model.addAttribute("name", user.getUserName());
 		model.addAttribute("email", user.getUserEmail());
 		model.addAttribute("user", user);
-		List<User> userList=null;
+		List<User> userList = null;
+		List<Device> deviceList = null;
 		try {
-			userList = userServiceImpl.getUserList(null);
+			userList = userServiceImpl.getUserList(0);
+			//deviceList = deviceServiceImpl.getDeviceList(0);
+			deviceList = deviceServiceImpl.getDeviceByProperty("deviceName", "Bhaskar");
+
+		} catch (DatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SystemErrorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		model.addAttribute("userList", userList);
+		model.addAttribute("deviceList", deviceList);
 		return "userDetails";
 	}
 
