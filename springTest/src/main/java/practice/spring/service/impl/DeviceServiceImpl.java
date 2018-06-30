@@ -1,0 +1,76 @@
+package practice.spring.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import practice.spring.dao.DatabaseOperations;
+import practice.spring.exceptions.DatabaseException;
+import practice.spring.pojo.Device;
+import practice.spring.service.DeviceService;
+
+@Component
+//@Transactional(rollbackFor = DatabaseException.class)
+public class DeviceServiceImpl implements DeviceService {
+
+	@Autowired
+	@Qualifier("deviceDbOperationsInMemImpl")
+	DatabaseOperations deviceDbOperationsImpl;
+
+	public DatabaseOperations getDeviceDbOperationsImpl() {
+		return deviceDbOperationsImpl;
+	}
+
+	public void setDeviceDbOperationsImpl(DatabaseOperations deviceDbOperationsImpl) {
+		this.deviceDbOperationsImpl = deviceDbOperationsImpl;
+	}
+
+	public Long createDevice(int id, Device value) throws DatabaseException {
+		try {
+			System.out.println("debug");
+			return getDeviceDbOperationsImpl().createRepo(id, value);
+		} catch (DataAccessException ex) {
+			// now display this message using model
+			throw new DatabaseException("Database Error::" + ex.getCause().toString());
+		}
+
+	}
+
+	public void updateDevice(int id, Device value) throws DatabaseException {
+		try {
+			getDeviceDbOperationsImpl().updateRepo(id, value);
+		} catch (DataAccessException ex) {
+			// now display this message using model
+			throw new DatabaseException("Database Error::" + ex.getCause().toString());
+		}
+
+
+	}
+
+	public Device getDevice(int id) {
+		return (Device) getDeviceDbOperationsImpl().getRepo(id);
+	}
+
+	public List<Device> getDeviceList(int id) throws DatabaseException {
+		return (List<Device>) getDeviceDbOperationsImpl().getRepoList(id);
+	}
+
+	public List<Device> getDeviceByProperty(String property, String value) throws DatabaseException {
+		try {
+			return (List<Device>) getDeviceDbOperationsImpl().getByProperty(property, value);
+		} catch (DataAccessException ex) {
+			// now display this message using model
+			throw new DatabaseException("Database Error::" + ex.getCause().toString());
+		}
+	
+	}
+
+	public Object deleteDevice(int id) {
+		getDeviceDbOperationsImpl().deleteRepo(id);
+		return null;
+	}
+}
