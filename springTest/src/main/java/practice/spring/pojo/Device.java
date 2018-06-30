@@ -7,6 +7,18 @@ public class Device {
 	private String deviceName;
 	private String deviceStatus;
 
+	public Device() {
+		super();
+	}
+
+	public Device(Device device) {
+		super();
+		Id = device.Id;
+		this.deviceId = device.deviceId;
+		this.deviceName = device.deviceName;
+		this.deviceStatus = device.deviceStatus;
+	}
+
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -39,7 +51,8 @@ public class Device {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		Id = id;

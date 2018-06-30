@@ -20,8 +20,8 @@ import practice.spring.exceptions.DatabaseException;
 import practice.spring.exceptions.SystemErrorException;
 import practice.spring.pojo.Device;
 import practice.spring.pojo.User;
-import practice.spring.utils.DeviceService;
-import practice.spring.utils.UserServiceImpl;
+import practice.spring.service.DeviceService;
+import practice.spring.service.impl.UserServiceImpl;
 import practice.spring.validator.userValidator;
 
 @SessionAttributes("registrationForm")
@@ -59,17 +59,17 @@ public class UserRegistrationController {
 			return "userRegistration";
 		} else {
 			try {
-				//userServiceImpl.createUser(0, user);
+				userServiceImpl.createUser(0, user);
 				Device device = new Device();
 				device.setDeviceName(user.getUserName());
 				device.setDeviceId("dummyID");
 				device.setDeviceStatus("OFFLINE");
 				deviceServiceImpl.createDevice(0, device);
 
-			} catch (DatabaseException e) {
+			} catch (SystemErrorException|DatabaseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
+			}
 			return "redirect:userDetails";
 
 		}
@@ -87,13 +87,13 @@ public class UserRegistrationController {
 		List<Device> deviceList = null;
 		try {
 			userList = userServiceImpl.getUserList(0);
-			//deviceList = deviceServiceImpl.getDeviceList(0);
-			deviceList = deviceServiceImpl.getDeviceByProperty("deviceName", "Bhaskar");
+			deviceList = deviceServiceImpl.getDeviceList(0);
+			//deviceList = deviceServiceImpl.getDeviceByProperty("deviceName", "Bhaskar");
 
-		} catch (DatabaseException e) {
+		} catch (SystemErrorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SystemErrorException e) {
+		} catch (DatabaseException e) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
