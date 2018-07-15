@@ -1,19 +1,46 @@
-package practice.spring.pojo;
+package com.spring.hibernate.entities;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
+@Table(name = "USER")
 public class User {
 
 	// validation used for this field in validator
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	@Column(name = "USER_NAME")
 	private String userName;
 	@Email
+	@Column(name = "USER_EMAIL")
 	private String userEmail;
 	// validation used for this field in validator
+	@Column(name = "PASSWORD")
 	private String password;
+	@Column(name = "CONFIRM_PASSWORD")
 	private String confirmPassword;
+	@Column(name = "ACCESS_TOKEN")
 	private String accessToken;
-	private int id;
+	
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable( name = "USER_DEVICE_REL_TAB", joinColumns = { @JoinColumn(name = "USER_ID")}, 
+	inverseJoinColumns = { @JoinColumn(name = "DEVICE_ID") })
+	private Set<Device> devices;
 	
 	public String getUserName() {
 		return userName;
@@ -50,5 +77,11 @@ public class User {
 	}
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
+	}
+	public Set<Device> getDevices() {
+		return devices;
+	}
+	public void setDevices(Set<Device> devices) {
+		this.devices = devices;
 	}
 }

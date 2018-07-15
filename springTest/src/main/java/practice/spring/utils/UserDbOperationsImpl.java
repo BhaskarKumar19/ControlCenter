@@ -4,11 +4,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import practice.spring.pojo.User;
+import com.spring.hibernate.entities.User;
 
 public class UserDbOperationsImpl implements DatabaseOperations {
 
@@ -63,7 +61,7 @@ public class UserDbOperationsImpl implements DatabaseOperations {
 
 	}
 
-	public Object getByProperty(String property, String value) {
+	public Object getByProperty(String property, Object value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

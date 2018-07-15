@@ -4,8 +4,8 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
 <hibernate-mapping>  
-	 
-	<class name="practice.spring.pojo.Device" table="DEVICE">
+<!--  
+	<class name="com.spring.hibernate.entities.Device" table="DEVICE">
       <meta attribute="class-description">
          This class contains the device detail. 
       </meta>
@@ -16,5 +16,5 @@
       <property name="deviceName" column="DEVICE_NAME" type="string"/>
       <property name="deviceStatus" column="DEVICE_STATUS" type="string"/>
    </class>
-       
+       					 -->
 </hibernate-mapping>  

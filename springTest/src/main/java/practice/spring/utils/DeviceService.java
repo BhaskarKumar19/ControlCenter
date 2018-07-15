@@ -2,8 +2,9 @@ package practice.spring.utils;
 
 import java.util.List;
 
+import com.spring.hibernate.entities.Device;
+
 import practice.spring.exceptions.DatabaseException;
-import practice.spring.pojo.Device;
 
 public interface DeviceService {
 
@@ -17,5 +18,5 @@ public interface DeviceService {
 
 	public List<Device> getDeviceList(int id) throws DatabaseException;
 
-	public Object deleteDevice(int id);
+	public Object deleteDevice(int id) throws DatabaseException;
 }

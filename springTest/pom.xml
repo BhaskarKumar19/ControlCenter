@@ -14,12 +14,12 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
+		
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.10</version>
+	</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -96,6 +96,55 @@
 		</dependency>
 		
 		<!-- Spring ORM support ends-->
+		
+		<!-- Spring Integration start-->
+		
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-core</artifactId>
+			<version>4.3.1.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-stream</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-mqtt -->
+		<dependency>
+		    <groupId>org.springframework.integration</groupId>
+		    <artifactId>spring-integration-mqtt</artifactId>
+		    <version>4.2.5.RELEASE</version>
+		</dependency>
+		
+		
+		<!-- Spring Integration ends-->
+		
+		<!--  local dependency of spring integration -->
+		<dependency>
+			 <groupId>springIntegrationModule</groupId>
+	  		 <artifactId>springIntegrationModule</artifactId>
+	 		 <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!--  local dependency of spring integration ends -->
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>4.0.5.RELEASE</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>
+		
 		
 		
 	</dependencies>

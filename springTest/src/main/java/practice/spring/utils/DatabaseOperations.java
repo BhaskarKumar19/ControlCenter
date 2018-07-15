@@ -16,7 +16,7 @@ public interface DatabaseOperations {
 
 	public long createRepo(int id, Object value);
 
-	public Object getByProperty(String property, String value);
+	public Object getByProperty(String property, Object value);
 
 	public void updateRepo(int id, Object value);
 

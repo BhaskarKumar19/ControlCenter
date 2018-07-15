@@ -1,17 +1,24 @@
 package practice.spring.utils;
 
-import practice.spring.exceptions.SystemErrorException;
+import java.util.List;
+
+import com.spring.hibernate.entities.Device;
+import com.spring.hibernate.entities.User;
+
+import practice.spring.exceptions.DatabaseException;
 
 public interface UserService {
 
-	public void createUser(int id, Object value) throws SystemErrorException;
+	public void createUser(int id, Object value) throws DatabaseException; 
 
-	public void updateUser(int id, Object value);
+	public void updateUser(int id, Object value) throws DatabaseException;
 
-	public Object getUser(int id);
+	public Object getUser(int id) throws DatabaseException;
+	
+	public List<User> getUserByProperty(String property, Object value) throws DatabaseException;
 
-	public Object getUserList(int id) throws SystemErrorException;
+	public Object getUserList(int id) throws DatabaseException;
 
-	public Object deleteUser(int id);
+	public Object deleteUser(int id) throws DatabaseException;
 
 }

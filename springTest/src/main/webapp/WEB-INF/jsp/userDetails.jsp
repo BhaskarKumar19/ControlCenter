@@ -51,5 +51,6 @@
 		
 	
 	<h3><a href="logout">Logout</a></h3>
+	<h3><a href="login">Login</a></h3>
 </body>
 </html>

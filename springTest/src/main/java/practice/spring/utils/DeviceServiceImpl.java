@@ -7,8 +7,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.hibernate.entities.Device;
+
 import practice.spring.exceptions.DatabaseException;
-import practice.spring.pojo.Device;
 
 @Component
 @Transactional(rollbackFor = DatabaseException.class)
@@ -43,7 +44,6 @@ public class DeviceServiceImpl implements DeviceService {
 			throw new DatabaseException("Database Error::" + ex.getCause().toString());
 		}
 
-
 	}
 
 	public Device getDevice(int id) {
@@ -51,7 +51,12 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	public List<Device> getDeviceList(int id) throws DatabaseException {
-		return (List<Device>) getDeviceDbOperationsImpl().getRepoList(id);
+		try {
+			return (List<Device>) getDeviceDbOperationsImpl().getRepoList(id);
+		} catch (DataAccessException ex) {
+			// now display this message using model
+			throw new DatabaseException("Database Error::" + ex.getCause().toString());
+		}
 	}
 
 	public List<Device> getDeviceByProperty(String property, String value) throws DatabaseException {
@@ -61,11 +66,16 @@ public class DeviceServiceImpl implements DeviceService {
 			// now display this message using model
 			throw new DatabaseException("Database Error::" + ex.getCause().toString());
 		}
-	
+
 	}
 
-	public Object deleteDevice(int id) {
-		getDeviceDbOperationsImpl().deleteRepo(id);
-		return null;
+	public Object deleteDevice(int id) throws DatabaseException {
+		try {
+			getDeviceDbOperationsImpl().deleteRepo(id);
+			return null;
+		} catch (DataAccessException ex) {
+			// now display this message using model
+			throw new DatabaseException("Database Error::" + ex.getCause().toString());
+		}
 	}
 }
